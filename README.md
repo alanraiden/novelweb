@@ -172,3 +172,4 @@ We welcome contributions to enhance Novel Hub! To contribute:
 
 Enjoy using **Novel Hub** and happy reading!
 # novelwebs
+# novelweb
