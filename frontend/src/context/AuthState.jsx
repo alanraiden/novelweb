@@ -5,7 +5,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 const AuthState = (props) => {
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
   const [loggedUser, setLoggedUser] = useState({});
   const [reload, setReload] = useState(false);
@@ -14,21 +14,23 @@ const AuthState = (props) => {
     const getUser = async () => {
       try {
         const token = Cookies.get("token");
+        if (!token) return;
 
-        if (token && token !== "") {
-          const response = await axios.get(`${API_URL}/users/me`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setLoggedUser(response.data);
-        }
+        const response = await axios.get(`${API_URL}/users/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+          timeout: 5000
+        });
+        setLoggedUser(response.data);
       } catch (error) {
-        console.log(error);
+        console.error("AuthState getUser error:", error?.message || error);
+        // if network error, backend likely down; we intentionally don't spam the user.
       }
     };
     getUser();
   }, [API_URL, reload]);
+
+  // ... rest of your code unchanged but import fix applied
+
 
   const update = async () => {
     setReload(!reload);

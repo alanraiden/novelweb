@@ -383,17 +383,7 @@ const Dashboard = () => {
                 </motion.div>
               </div>
 
-              {userData?.role === "user" && !authorshipRequested && (
-                <motion.button
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                  onClick={() => setShowAuthorForm(true)}
-                  className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-3 rounded-xl hover:shadow-lg transition-all duration-300 flex items-center space-x-2"
-                >
-                  <span>Apply for Authorship</span>
-                  <FaChevronRight className="transform group-hover:translate-x-1 transition-transform duration-300" />
-                </motion.button>
-              )}
+             
             </motion.div>
 
             <motion.div variants={itemVariants} className="flex space-x-4 mb-8">

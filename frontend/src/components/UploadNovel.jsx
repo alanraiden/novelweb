@@ -103,8 +103,8 @@ const UploadNovel = ({ authorData, onNovelCreated, onClose }) => {
 
       const response = await axios.post(`${API_URL}/novels`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
+          
+          Authorization: token ? `Bearer ${token}` : undefined,
         },
       });
 
